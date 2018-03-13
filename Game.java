@@ -181,5 +181,6 @@ public class Game
     {
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print(currentRoom.getExitsString());
+        System.out.println();
     }
 }
