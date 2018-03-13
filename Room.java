@@ -71,11 +71,23 @@ public class Room
     {
         String exitsDescription = "Exits: ";
         Set<String> setMap = exitsMap.keySet();
-                
+
         for(String direction : setMap){
             exitsDescription += direction + " ";
         }
-        
+
         return exitsDescription;
+    }
+
+    /**
+     * Return a long description of this room, of the form:
+     *     You are in the 'name of room'
+     *     Exits: north west southwest
+     * @return A description of the room, including exits.
+     */
+    public String getLongDescription()
+    {
+        String returnDescription = "You are " + description + ".\n" +getExitsString();
+        return returnDescription;
     }
 }
