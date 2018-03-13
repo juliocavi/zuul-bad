@@ -46,13 +46,13 @@ public class Game
         quirofano = new Room("in the operating theater");
 
         // initialise room exits
-        hall.setExits(null, consulta, null, habitaciones, cafeteria);
-        habitaciones.setExits(null, hall, null, null, null);
-        cafeteria.setExits(consulta, preoperatorio, null, null, null);
-        consulta.setExits(escaner, null, cafeteria, hall, preoperatorio);
-        escaner.setExits(null, quirofano, consulta, null, null);
-        preoperatorio.setExits(null, null, null, cafeteria, null);
-        quirofano.setExits(null, null, null, escaner, preoperatorio);
+        hall.setExits(null, consulta, null, habitaciones, cafeteria, null);
+        habitaciones.setExits(null, hall, null, null, null, null);
+        cafeteria.setExits(consulta, preoperatorio, null, null, null, hall);
+        consulta.setExits(escaner, null, cafeteria, hall, preoperatorio, null);
+        escaner.setExits(null, quirofano, consulta, null, null, null);
+        preoperatorio.setExits(null, null, null, cafeteria, null, consulta);
+        quirofano.setExits(null, null, null, escaner, preoperatorio, null);
 
         currentRoom = hall;  // start game in the hall
     }
