@@ -46,13 +46,23 @@ public class Game
         quirofano = new Room("in the operating theater");
 
         // initialise room exits
-        hall.setExits(null, consulta, null, habitaciones, cafeteria, null);
-        habitaciones.setExits(null, hall, null, null, null, null);
-        cafeteria.setExits(consulta, preoperatorio, null, null, null, hall);
-        consulta.setExits(escaner, null, cafeteria, hall, preoperatorio, null);
-        escaner.setExits(null, quirofano, consulta, null, null, null);
-        preoperatorio.setExits(null, null, null, cafeteria, null, consulta);
-        quirofano.setExits(null, null, null, escaner, preoperatorio, null);
+        hall.setExit("east", consulta);
+        hall.setExit("west", habitaciones);
+        hall.setExit("southEast", cafeteria);
+        habitaciones.setExit("east", hall);
+        cafeteria.setExit("north", consulta);
+        cafeteria.setExit("east", preoperatorio);
+        cafeteria.setExit("northWest", hall);
+        consulta.setExit("north", escaner);
+        consulta.setExit("south", cafeteria);
+        consulta.setExit("west", hall);
+        consulta.setExit("southEast", preoperatorio);
+        escaner.setExit("east", quirofano);
+        escaner.setExit("south", consulta);
+        preoperatorio.setExit("west", cafeteria);
+        preoperatorio.setExit("northWest", consulta);
+        quirofano.setExit("west", escaner);
+        quirofano.setExit("southEast", preoperatorio);
 
         currentRoom = hall;  // start game in the hall
     }
@@ -173,7 +183,7 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
-    
+
     /**
      * Print the actual location of the gamer.
      */
