@@ -11,8 +11,8 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael KÃ¶lling and David J. Barnes
- * @version 2011.07.31
+ * @author  Julio Cachón Villadangos
+ * @version 2018.03.13
  */
 
 public class Game 
@@ -119,10 +119,13 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
+        else if(commandWord.equals("look")){
+            look();
+        }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-
+        
         return wantToQuit;
     }
 
@@ -188,6 +191,14 @@ public class Game
      * Print the actual location of the gamer.
      */
     private void printLocationInfo()
+    {
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
+    /**
+     * Take a look of the exits for the current room
+     */
+    private void look()
     {
         System.out.println(currentRoom.getLongDescription());
     }

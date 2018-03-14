@@ -12,8 +12,8 @@ import java.util.Set;
  * east, south, west.  For each direction, the room stores a reference
  * to the neighboring room, or null if there is no exit in that direction.
  * 
- * @author  Michael KÃ¶lling and David J. Barnes
- * @version 2011.07.31
+ * @author  Julio Cachón Villadangos
+ * @version 2018.03.13
  */
 public class Room 
 {
