@@ -40,13 +40,14 @@ public class CommandWords
     }
     
     /**
-     * Print in the windows all the valid commands.
+     * Return all the valid commands.
      */
-    public void showAll()
+    public String getCommandList()
     {
+        String commandsString = "";
         for (String command : validCommands) {
-            System.out.println(command + " ");
+            commandsString += command + " ";
         }
-        System.out.println();
+        return commandsString;
     }
 }
