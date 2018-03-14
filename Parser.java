@@ -13,8 +13,8 @@ import java.util.Scanner;
  * the known commands, and if the input is not one of the known commands, it
  * returns a command object that is marked as an unknown command.
  * 
- * @author  Michael KÃ¶lling and David J. Barnes
- * @version 2011.07.31
+ * @author  Julio Cachón Villadangos
+ * @version 2018.03.14
  */
 public class Parser 
 {
@@ -60,6 +60,14 @@ public class Parser
         }
         else {
             return new Command(null, word2); 
-        }
+        }               
+    }
+
+    /**
+     * Print a command´s list with the valid commandWords
+     */
+    public void showCommands()
+    {
+        commands.showAll();
     }
 }

@@ -5,8 +5,8 @@
  * This class holds an enumeration of all command words known to the game.
  * It is used to recognise commands as they are typed in.
  *
- * @author  Michael KÃ¶lling and David J. Barnes
- * @version 2011.07.31
+ * @author  Julio Cachón Villadangos
+ * @version 2018.03.14
  */
 
 public class CommandWords
@@ -37,5 +37,16 @@ public class CommandWords
         }
         // if we get here, the string was not found in the commands
         return false;
+    }
+    
+    /**
+     * Print in the windows all the valid commands.
+     */
+    public void showAll()
+    {
+        for (String command : validCommands) {
+            System.out.println(command + " ");
+        }
+        System.out.println();
     }
 }
