@@ -35,15 +35,44 @@ public class Game
     private void createRooms()
     {
         Room hall, habitaciones, cafeteria, consulta, escaner, preoperatorio, quirofano;
+        Item coat, receptionTable, potty, television, bed, coffee, chair, notebook, safeboard, antibiotic, bandages, scalpel;
 
         // create the rooms
-        hall = new Room("in the hall", new Item("a coat", 0.5));
-        habitaciones = new Room("in the bedrooms", new Item("a potty", 0.3));
-        cafeteria = new Room("in the buffet", new Item("ta coffee", 0.2));
-        consulta = new Room("in the consulting room", new Item("a notebook", 0.1));
-        escaner = new Room("in the scaner room", new Item("ta safeboard", 5));
-        preoperatorio = new Room("in the preoperative room", new Item("an antibiotic", 0.2));
-        quirofano = new Room("in the operating theater", new Item("a scalpel",0.1));
+        hall = new Room("in the hall");
+        habitaciones = new Room("in the bedrooms");
+        cafeteria = new Room("in the buffet");
+        consulta = new Room("in the consulting room");
+        escaner = new Room("in the scaner room");
+        preoperatorio = new Room("in the preoperative room");
+        quirofano = new Room("in the operating theater");
+        
+        //create the items of the rooms
+        coat = new Item("a coat", 0.5);
+        receptionTable = new Item("a reception table", 15);
+        potty = new Item("a potty", 0.3);
+        television = new Item("a television", 6);
+        bed = new Item("a bed", 25);
+        coffee = new Item("ta coffee", 0.2);
+        chair = new Item("a chair", 1);
+        notebook = new Item("a notebook", 0.1);
+        safeboard = new Item("a safeboard", 5);
+        antibiotic = new Item("an antibiotic", 0.2);
+        bandages = new Item("bandage", 0.2);
+        scalpel = new Item("a scalpel",0.1);
+        
+        //add the item to the rooms
+        hall.addItem(coat);
+        hall.addItem(receptionTable);
+        habitaciones.addItem(potty);
+        habitaciones.addItem(television);
+        habitaciones.addItem(bed);
+        cafeteria.addItem(coffee);
+        cafeteria.addItem(chair);
+        consulta.addItem(notebook);
+        escaner.addItem(safeboard);
+        preoperatorio.addItem(antibiotic);
+        preoperatorio.addItem(bandages);
+        quirofano.addItem(scalpel);
 
         // initialise room exits
         hall.setExit("east", consulta);
@@ -65,6 +94,8 @@ public class Game
         quirofano.setExit("southEast", preoperatorio);
 
         currentRoom = hall;  // start game in the hall
+        
+        
     }
 
     /**

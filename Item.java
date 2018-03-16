@@ -22,13 +22,15 @@ public class Item
         this.itemDescription = itemDescription;
         this.itemWeight = itemWeight;        
     }
-    
+        
     /**
      * Return the description and weight of an Item.
+     * 
+     * @return a String eith the description of the items
      */
     public String getItemInfo()
     {
         return "There is " + itemDescription + ", " 
-        + itemWeight + "kg.";
+        + itemWeight + "kg";
     }
 }
