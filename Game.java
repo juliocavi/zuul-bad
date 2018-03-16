@@ -37,13 +37,13 @@ public class Game
         Room hall, habitaciones, cafeteria, consulta, escaner, preoperatorio, quirofano;
 
         // create the rooms
-        hall = new Room("in the hall");
-        habitaciones = new Room("in the bedrooms");
-        cafeteria = new Room("in the buffet");
-        consulta = new Room("in the consulting room");
-        escaner = new Room("in the scaner room");
-        preoperatorio = new Room("in the preoperative room");
-        quirofano = new Room("in the operating theater");
+        hall = new Room("in the hall", new Item("a coat", 0.5));
+        habitaciones = new Room("in the bedrooms", new Item("a potty", 0.3));
+        cafeteria = new Room("in the buffet", new Item("ta coffee", 0.2));
+        consulta = new Room("in the consulting room", new Item("a notebook", 0.1));
+        escaner = new Room("in the scaner room", new Item("ta safeboard", 5));
+        preoperatorio = new Room("in the preoperative room", new Item("an antibiotic", 0.2));
+        quirofano = new Room("in the operating theater", new Item("a scalpel",0.1));
 
         // initialise room exits
         hall.setExit("east", consulta);
