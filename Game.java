@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room previousRoom;
 
     /**
      * Create the game and initialise its internal map.
@@ -27,6 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        previousRoom = null;
     }
 
     /**
@@ -45,7 +47,7 @@ public class Game
         escaner = new Room("in the scaner room");
         preoperatorio = new Room("in the preoperative room");
         quirofano = new Room("in the operating theater");
-        
+
         //create the items of the rooms
         coat = new Item("a coat", 0.5);
         receptionTable = new Item("a reception table", 15);
@@ -59,7 +61,7 @@ public class Game
         antibiotic = new Item("an antibiotic", 0.2);
         bandages = new Item("bandage", 0.2);
         scalpel = new Item("a scalpel",0.1);
-        
+
         //add the item to the rooms
         hall.addItem(coat);
         hall.addItem(receptionTable);
@@ -94,8 +96,6 @@ public class Game
         quirofano.setExit("southEast", preoperatorio);
 
         currentRoom = hall;  // start game in the hall
-        
-        
     }
 
     /**
@@ -159,7 +159,10 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-        
+        if (commandWord.equals("back")) {
+            back();
+        }
+
         return wantToQuit;
     }
 
@@ -200,11 +203,28 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            previousRoom = currentRoom;
             currentRoom = nextRoom;
             printLocationInfo();
         }
     }
 
+    /**
+     * Return to the previous room
+     */
+    private void back()
+    {
+        if(previousRoom != null){
+            currentRoom = previousRoom;
+            printLocationInfo();
+            previousRoom = null;
+        }
+        else{
+            System.out.println("***NO PUEDES PASAR***");
+            printLocationInfo();
+        }        
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -228,7 +248,7 @@ public class Game
     {
         System.out.println(currentRoom.getLongDescription());
     }
-    
+
     /**
      * Take a look of the exits for the current room
      */
@@ -236,7 +256,7 @@ public class Game
     {
         System.out.println(currentRoom.getLongDescription());
     }
-    
+
     /**
      * Eat some food
      */
