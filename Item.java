@@ -11,26 +11,67 @@
 public class Item
 {
     // a constant array that holds all valid command words
+    private String itemName;
     private String itemDescription;
     private double itemWeight;
+    private boolean canBeTaken;
     
     /**
-     * constructor for an Item of the class Item.
+     * Constructor for an Item of the class Item.
      */
-    public Item(String itemDescription, double itemWeight)
+    public Item(String itemName, String itemDescription, double itemWeight, boolean canBeTaken)
     {
+        this.itemName = itemName;
         this.itemDescription = itemDescription;
-        this.itemWeight = itemWeight;        
+        this.itemWeight = itemWeight;    
+        this.canBeTaken = canBeTaken;
     }
         
     /**
      * Return the description and weight of an Item.
      * 
-     * @return a String eith the description of the items
+     * @return a String with the complete details of the items
      */
     public String getItemInfo()
     {
         return "There is " + itemDescription + ", " 
         + itemWeight + "kg";
+    }
+    
+    /**
+     * Return the item´s name
+     * 
+     * @return the item´s name like a String
+     */
+    public String getItemName(){
+        return itemName;
+    }
+    
+    /**
+     * Return the item´s description
+     * 
+     * @return the item´s description like a String
+     */
+    public String getItemDescription()
+    {
+        return itemDescription;
+    }
+    
+    /**
+     * Return the item´s weight
+     * 
+     * @return the item´s weight like a double
+     */
+    public double getItemWeight(){
+        return itemWeight;
+    }
+    
+    /**
+     * Return true if the item to take can be taken, and false if it can´t be taken
+     * 
+     * @return a boolen for situations like, if the item can be taken, or if it can´t be taken
+     */
+    public boolean itemCanBeTaken(){
+        return canBeTaken;
     }
 }

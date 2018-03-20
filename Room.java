@@ -105,6 +105,33 @@ public class Room
     }
     
     /**
+     * Return an item of the current room
+     * 
+     * @return an item
+     */
+    public Item getItem(String itemString)
+    {
+        Item itemTaken = null;
+        for(Item item : itemsRoom)
+        {
+            if(item.getItemName().equals(itemString)){
+                itemTaken = item;
+            }
+        }
+        return itemTaken;
+    }
+    
+    /**
+     * Return the ArrayList of items from the current room
+     * 
+     * @ return an ArrayList of items
+     */
+    public ArrayList<Item> getItemsRoom()
+    {
+        return itemsRoom;
+    }
+        
+    /**
      * Return a long description of this room, of the form:
      *     You are in the 'name of room'
      *     Exits: north west southwest

@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.ArrayList;
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -22,6 +23,11 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> moveRooms;
+    private ArrayList<Item> inventory;
+    //max weight for the inventory
+    private static final double MAX_WEIGHT = 5;
+    //actual weight of the inventory
+    private double inventoryWeight;
 
     /**
      * Create the game and initialise its internal map.
@@ -31,10 +37,12 @@ public class Game
         createRooms();
         parser = new Parser();
         moveRooms = new Stack<>();
+        inventory = new ArrayList<>();
+        inventoryWeight = 0;
     }
 
     /**
-     * Create all the rooms and link their exits together.
+     * Create all the rooms and link their exits together. Create the items, and add that to the rooms
      */
     private void createRooms()
     {
@@ -51,18 +59,18 @@ public class Game
         quirofano = new Room("in the operating theater");
 
         //create the items of the rooms
-        coat = new Item("a coat", 0.5);
-        receptionTable = new Item("a reception table", 15);
-        potty = new Item("a potty", 0.3);
-        television = new Item("a television", 6);
-        bed = new Item("a bed", 25);
-        coffee = new Item("ta coffee", 0.2);
-        chair = new Item("a chair", 1);
-        notebook = new Item("a notebook", 0.1);
-        safeboard = new Item("a safeboard", 5);
-        antibiotic = new Item("an antibiotic", 0.2);
-        bandages = new Item("bandage", 0.2);
-        scalpel = new Item("a scalpel",0.1);
+        coat = new Item("coat", "a coat", 0.5, true);
+        receptionTable = new Item("reception_table", "a reception_table", 15, false);
+        potty = new Item("potty", "a potty", 0.3, true);
+        television = new Item("television", "a television", 6, true);
+        bed = new Item("bed", "a bed", 25, false);
+        coffee = new Item("coffe", "ta coffee", 0.2, true);
+        chair = new Item("chair", "a chair", 1, false);
+        notebook = new Item("notebook", "a notebook", 0.1, true);
+        safeboard = new Item("safeboard", "a safeboard", 5, true);
+        antibiotic = new Item("antibiotic", "an antibiotic", 0.2, true);
+        bandages = new Item("bandage", "a bandage", 0.2, true);
+        scalpel = new Item("scalpel", "a scalpel",0.1, true);
 
         //add the item to the rooms
         hall.addItem(coat);
@@ -72,7 +80,6 @@ public class Game
         habitaciones.addItem(bed);
         cafeteria.addItem(coffee);
         cafeteria.addItem(chair);
-        consulta.addItem(notebook);
         escaner.addItem(safeboard);
         preoperatorio.addItem(antibiotic);
         preoperatorio.addItem(bandages);
@@ -161,15 +168,23 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-        if (commandWord.equals("back")) {
+        else if (commandWord.equals("back")) {
             back();
+        }
+        else if (commandWord.equals("take")) {
+            take(command.getSecondWord());
+        }
+        else if (commandWord.equals("drop")) {
+            drop(command.getSecondWord());
+        }
+        else if (commandWord.equals("items")) {
+            items();
         }
 
         return wantToQuit;
     }
 
     // implementations of user commands:
-
     /**
      * Print out some help information.
      * Here we print some stupid, cryptic message and a list of the 
@@ -221,7 +236,7 @@ public class Game
             printLocationInfo();
         }        
     }
-    
+
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -261,4 +276,85 @@ public class Game
     {
         System.out.println("You have eaten now and you are not hungry any more");
     }
+
+    /**
+     * Take an item from the room
+     */
+    private void take(String secondWord) //Item second word of the command)
+    {
+        // if there is no second word, we don't know what to take...
+        if(secondWord == null){
+            System.out.println("Take what?");
+        }
+        else{
+            //if there are items in the rooms
+            if(currentRoom.getItemsRoom().size() > 0){
+                Item itemTaken = currentRoom.getItem(secondWord);
+                if(itemTaken != null){
+                    //take current item, if it can be taken
+                    if(itemTaken.itemCanBeTaken() == true && (inventoryWeight + itemTaken.getItemWeight()) <= MAX_WEIGHT){
+                        inventory.add(itemTaken);
+                        inventoryWeight += itemTaken.getItemWeight();
+                        currentRoom.getItemsRoom().remove(itemTaken);
+                        System.out.println("You have taken the item: " + itemTaken.getItemName());
+                    }
+                    else if(itemTaken.itemCanBeTaken() == false){
+                        System.out.println("You can´t take the item");
+                    }
+                    else{
+                        System.out.println("Your inventory´s weight can´t be excced");
+                    }
+                }
+                else{
+                    System.out.println("The selected item don´t exists");
+                }
+            }
+            else{
+                System.out.println("There are no items to take in this room");
+            }
+        }
+    }
+
+    /**
+     * Drop an item from your item´s inventory
+     */
+    private void drop(String secondWord)
+    {
+        if(secondWord == null) {
+            // if there is no second word, we don't know what to drop...
+            System.out.println("Drop what?");
+        }
+        else{
+            boolean encontrado = false;
+            for(int i = 0; i<inventory.size() && !encontrado; i++){
+                Item itemToDrop = inventory.get(i);
+                //drop current item.            
+                if(itemToDrop.getItemName().equals(secondWord)){
+                    currentRoom.addItem(itemToDrop);
+                    inventory.remove(itemToDrop);
+                    inventoryWeight -= itemToDrop.getItemWeight();
+                    encontrado = true;
+                    System.out.println("You have droppeed the item: " + itemToDrop.getItemName());
+                }
+            }
+        }
+    }
+
+    /**
+     * Show the items of your inventory
+     */
+    private void items()
+    {
+        String showInventory = "You have: \n";
+        if(inventory.size() == 0){
+            showInventory += "nothing";
+        }
+        else{
+            for (Item item : inventory){
+                showInventory += item.getItemDescription() + "\n";
+            }
+        }
+        System.out.println(showInventory);
+    }
 }
+
