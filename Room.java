@@ -103,7 +103,7 @@ public class Room
     {
         itemsRoom.add(currentItem);
     }
-    
+            
     /**
      * Return a long description of this room, of the form:
      *     You are in the 'name of room'
