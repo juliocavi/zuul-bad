@@ -11,18 +11,30 @@
 public class Item
 {
     // a constant array that holds all valid command words
+    private String id;
     private String itemDescription;
     private double itemWeight;
     
     /**
      * constructor for an Item of the class Item.
      */
-    public Item(String itemDescription, double itemWeight)
+    public Item(String id, String itemDescription, double itemWeight)
     {
+        this.id = id;
         this.itemDescription = itemDescription;
         this.itemWeight = itemWeight;        
     }
         
+    /**
+     * Get id from an item
+     * 
+     * @return the id of an item
+     */
+    public String getId()
+    {
+        return id;
+    }
+    
     /**
      * Return the description and weight of an Item.
      * 
