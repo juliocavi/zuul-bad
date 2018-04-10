@@ -14,17 +14,19 @@ public class Item
     private String id;
     private String itemDescription;
     private double itemWeight;
-    
+    private boolean canBePickedUp;
+
     /**
      * constructor for an Item of the class Item.
      */
-    public Item(String id, String itemDescription, double itemWeight)
+    public Item(String id, String itemDescription, double itemWeight, boolean canBePickedUp)
     {
         this.id = id;
         this.itemDescription = itemDescription;
-        this.itemWeight = itemWeight;        
+        this.itemWeight = itemWeight;    
+        this.canBePickedUp = canBePickedUp;
     }
-        
+
     /**
      * Get id from an item
      * 
@@ -34,7 +36,18 @@ public class Item
     {
         return id;
     }
-    
+
+    /**
+     * Return true if the current item can be taken,
+     * or false if it can´t be taken
+     * 
+     * @return a boolean, true or false
+     */
+    public boolean canBePickedUp()
+    {
+        return canBePickedUp;
+    }
+
     /**
      * Return the description and weight of an Item.
      * 

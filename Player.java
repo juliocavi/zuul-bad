@@ -105,10 +105,15 @@ public class Player
             if(currentRoom.emptyRoom() == false){
                 Item itemTaken = currentRoom.getItemRoom(secondWord);
                 if(itemTaken != null){
-                    //take current item
-                    inventory.add(itemTaken);
-                    currentRoom.removeItem(itemTaken.getId());
-                    System.out.println("You have taken the item: " + itemTaken.getId());
+                    if(itemTaken.canBePickedUp() == true){
+                        //take current item
+                        inventory.add(itemTaken);
+                        currentRoom.removeItem(itemTaken.getId());
+                        System.out.println("You have taken the item: " + itemTaken.getId());
+                    }
+                    else{
+                        System.out.println("This item can´t be taken.");
+                    }
                 }
                 else{
                     System.out.println("This item don´t exist.");

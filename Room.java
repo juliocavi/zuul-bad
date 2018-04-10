@@ -122,6 +122,14 @@ public class Room
         }
         return itemTaken;
     }
+    
+    /**
+     * Remove an item from the room
+     */
+    public void removeItem(String itemString)
+    {
+        itemsRoom.remove(getItemRoom(itemString));
+    }
 
     /**
      * Return true if the current room haven´t items, 
@@ -137,15 +145,7 @@ public class Room
         }
         return noItems;
     }
-    
-    /**
-     * Remove an item from the room
-     */
-    public void removeItem(String itemString)
-    {
-        itemsRoom.remove(getItemRoom(itemString));
-    }
-
+        
     /**
      * Return a long description of this room, of the form:
      *     You are in the 'name of room'
