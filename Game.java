@@ -54,7 +54,7 @@ public class Game
         potty = new Item("potty", "a potty", 0.3, true);
         television = new Item("television", "a television", 6, false);
         bed = new Item("bed", "a bed", 25, false);
-        coffee = new Item("caffe", "ta coffee", 0.2, true);
+        coffee = new Item("coffee", "a coffee", 0.2, true);
         chair = new Item("chair", "a chair", 1, false);
         notebook = new Item("notebook", "a notebook", 0.1, true);
         safeboard = new Item("safeboard", "a safeboard", 5, true);
@@ -165,6 +165,9 @@ public class Game
         }
         else if (commandWord.equals("take")) {
             player.take(command.getSecondWord());
+        }
+        else if (commandWord.equals("items")) {
+            player.showItems();
         }
 
         return wantToQuit;

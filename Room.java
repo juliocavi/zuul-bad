@@ -91,7 +91,7 @@ public class Room
     {
         String itemDescription = "";
         for(Item item : itemsRoom){
-            itemDescription += item.getItemInfo() + ".\n";
+            itemDescription += item.getItemInfo() + "\n";
         }
         return itemDescription;
     }
@@ -154,7 +154,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitsString() + ".\n" + getItemsString();
+        return "You are " + description + ".\n" + getExitsString() + ".\n" + "There is: \n" + getItemsString();
     }
 }
 

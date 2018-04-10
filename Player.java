@@ -13,7 +13,7 @@ public class Player
     private Stack<Room> moveRooms;
     private ArrayList<Item> inventory;
     //private static final double MAX_WEIGHT = 5;
-    //private double inventoryWeight;
+    private double inventoryWeight;
 
     /**
      * Constructor for objects of class Player
@@ -24,7 +24,7 @@ public class Player
         this.currentRoom = currentRoom;
         moveRooms = new Stack<>();
         inventory = new ArrayList<>();
-        //inventoryWeight = 0;
+        inventoryWeight = 0;
     }
 
     /**
@@ -108,8 +108,9 @@ public class Player
                     if(itemTaken.canBePickedUp() == true){
                         //take current item
                         inventory.add(itemTaken);
+                        inventoryWeight += itemTaken.getItemWeight();
                         currentRoom.removeItem(itemTaken.getId());
-                        System.out.println("You have taken the item: " + itemTaken.getId());
+                        System.out.println("You have taken the item: " + itemTaken.getId() + ".");
                     }
                     else{
                         System.out.println("This item can´t be taken.");
@@ -122,6 +123,23 @@ public class Player
             else{
                 System.out.println("There are no items to take in this room.");
             }
+        }
+    }
+
+    /**
+     * Show the items of the player´s inventory.
+     */
+    public void showItems()
+    {
+        if(inventory.size() != 0){
+            System.out.println("You have:");
+            for(Item item : inventory){
+                System.out.println(item.getItemInfo());
+            }
+            System.out.println("\nInventoryWeight: " + inventoryWeight + " kg.");
+        }
+        else{
+            System.out.println("There are no items in your inventory.");
         }
     }
 }

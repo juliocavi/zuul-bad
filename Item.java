@@ -38,6 +38,16 @@ public class Item
     }
 
     /**
+     * Return the item´s weight.
+     * 
+     * @return the item´s weight like a double.
+     */
+    public double getItemWeight()
+    {
+        return itemWeight;
+    }
+    
+    /**
      * Return true if the current item can be taken,
      * or false if it can´t be taken
      * 
@@ -55,7 +65,7 @@ public class Item
      */
     public String getItemInfo()
     {
-        return "There is " + itemDescription + ", " 
-        + itemWeight + "kg";
+        return itemDescription + ", " 
+        + itemWeight + " kg.";
     }
 }
