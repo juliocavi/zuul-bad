@@ -11,18 +11,53 @@
 public class Item
 {
     // a constant array that holds all valid command words
+    private String id;
     private String itemDescription;
     private double itemWeight;
-    
+    private boolean canBePickedUp;
+
     /**
      * constructor for an Item of the class Item.
      */
-    public Item(String itemDescription, double itemWeight)
+    public Item(String id, String itemDescription, double itemWeight, boolean canBePickedUp)
     {
+        this.id = id;
         this.itemDescription = itemDescription;
-        this.itemWeight = itemWeight;        
+        this.itemWeight = itemWeight;    
+        this.canBePickedUp = canBePickedUp;
     }
-        
+
+    /**
+     * Get id from an item
+     * 
+     * @return the id of an item
+     */
+    public String getId()
+    {
+        return id;
+    }
+
+    /**
+     * Return the item´s weight.
+     * 
+     * @return the item´s weight like a double.
+     */
+    public double getItemWeight()
+    {
+        return itemWeight;
+    }
+    
+    /**
+     * Return true if the current item can be taken,
+     * or false if it can´t be taken
+     * 
+     * @return a boolean, true or false
+     */
+    public boolean canBePickedUp()
+    {
+        return canBePickedUp;
+    }
+
     /**
      * Return the description and weight of an Item.
      * 
@@ -30,7 +65,7 @@ public class Item
      */
     public String getItemInfo()
     {
-        return "There is " + itemDescription + ", " 
-        + itemWeight + "kg";
+        return itemDescription + ", " 
+        + itemWeight + " kg.";
     }
 }

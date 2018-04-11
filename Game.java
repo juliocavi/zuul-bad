@@ -49,18 +49,18 @@ public class Game
         quirofano = new Room("in the operating theater");
 
         //create the items of the rooms
-        coat = new Item("a coat", 0.5);
-        receptionTable = new Item("a reception table", 15);
-        potty = new Item("a potty", 0.3);
-        television = new Item("a television", 6);
-        bed = new Item("a bed", 25);
-        coffee = new Item("ta coffee", 0.2);
-        chair = new Item("a chair", 1);
-        notebook = new Item("a notebook", 0.1);
-        safeboard = new Item("a safeboard", 5);
-        antibiotic = new Item("an antibiotic", 0.2);
-        bandages = new Item("bandage", 0.2);
-        scalpel = new Item("a scalpel",0.1);
+        coat = new Item("coat", "a coat", 0.5, true);
+        receptionTable = new Item("table", "a reception table", 15, false);
+        potty = new Item("potty", "a potty", 0.3, true);
+        television = new Item("television", "a television", 6, false);
+        bed = new Item("bed", "a bed", 25, false);
+        coffee = new Item("coffee", "a coffee", 0.2, true);
+        chair = new Item("chair", "a chair", 1, false);
+        notebook = new Item("notebook", "a notebook", 0.1, true);
+        safeboard = new Item("safeboard", "a safeboard", 5, true);
+        antibiotic = new Item("antibiotic", "an antibiotic", 0.2, true);
+        bandages = new Item("bandage", "bandage", 0.2, true);
+        scalpel = new Item("scalpel", "a scalpel",0.1, true);
 
         //add the item to the rooms
         hall.addItem(coat);
@@ -70,7 +70,7 @@ public class Game
         habitaciones.addItem(bed);
         cafeteria.addItem(coffee);
         cafeteria.addItem(chair);
-        consulta.addItem(notebook);
+        //consulta.addItem(notebook);
         escaner.addItem(safeboard);
         preoperatorio.addItem(antibiotic);
         preoperatorio.addItem(bandages);
@@ -162,6 +162,15 @@ public class Game
         }
         else if (commandWord.equals("back")) {
             player.back();
+        }
+        else if (commandWord.equals("take")) {
+            player.take(command.getSecondWord());
+        }
+        else if (commandWord.equals("items")) {
+            player.showItems();
+        }
+        else if (commandWord.equals("drop")) {
+            player.dropItem(command.getSecondWord());
         }
 
         return wantToQuit;

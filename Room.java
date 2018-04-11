@@ -81,7 +81,7 @@ public class Room
 
         return exitsDescription;
     }
-        
+
     /**
      * Return a description of the items.
      * 
@@ -91,11 +91,11 @@ public class Room
     {
         String itemDescription = "";
         for(Item item : itemsRoom){
-            itemDescription += item.getItemInfo() + ".\n";
+            itemDescription += item.getItemInfo() + "\n";
         }
         return itemDescription;
     }
-    
+
     /**
      * Add an item to the current room
      */
@@ -103,7 +103,49 @@ public class Room
     {
         itemsRoom.add(currentItem);
     }
-            
+
+    /**
+     * Get item from the room.
+     * 
+     * @return An item from the room.
+     */
+    public Item getItemRoom(String itemString)
+    {
+        Item itemTaken = null;
+        boolean found = false;
+        for(int i = 0; i < itemsRoom.size() && !found; i++){
+            Item itemToTake = itemsRoom.get(i);
+            if(itemToTake.getId().equals(itemString)){
+                itemTaken = itemToTake;
+                found = true;
+            }
+        }
+        return itemTaken;
+    }
+    
+    /**
+     * Remove an item from the room
+     */
+    public void removeItem(String itemString)
+    {
+        itemsRoom.remove(getItemRoom(itemString));
+    }
+
+    /**
+     * Return true if the current room haven´t items, 
+     * or false if there are items.
+     * 
+     * @return a boolean, true or false.
+     */
+    public boolean emptyRoom()
+    {
+        boolean noItems = false;
+        if(itemsRoom.size() == 0){
+            noItems = true;
+        }
+        return noItems;
+    }
+        
     /**
      * Return a long description of this room, of the form:
      *     You are in the 'name of room'
@@ -112,6 +154,14 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitsString() + ".\n" + getItemsString();
+        String toReturn = "You are " + description + ".\n" + getExitsString() + ".\n" + "There is: \n";
+        if(!itemsRoom.isEmpty()){
+            toReturn += getItemsString();
+        }
+        else{
+            toReturn += "nothing in this room.\n";
+        }
+        return toReturn;
     }
 }
+
