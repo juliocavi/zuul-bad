@@ -12,7 +12,7 @@ public class Player
     private Room currentRoom;
     private Stack<Room> moveRooms;
     private ArrayList<Item> inventory;
-    //private static final double MAX_WEIGHT = 5;
+    private static final double MAX_WEIGHT = 5;
     private double inventoryWeight;
 
     /**
@@ -106,11 +106,16 @@ public class Player
                 Item itemTaken = currentRoom.getItemRoom(secondWord);
                 if(itemTaken != null){
                     if(itemTaken.canBePickedUp() == true){
-                        //take current item
-                        inventory.add(itemTaken);
-                        inventoryWeight += itemTaken.getItemWeight();
-                        currentRoom.removeItem(itemTaken.getId());
-                        System.out.println("You have taken the item: " + itemTaken.getId() + ".");
+                        if((inventoryWeight + itemTaken.getItemWeight()) <= MAX_WEIGHT){
+                            //take current item
+                            inventory.add(itemTaken);
+                            inventoryWeight += itemTaken.getItemWeight();
+                            currentRoom.removeItem(itemTaken.getId());
+                            System.out.println("You have taken the item: " + itemTaken.getId() + ".");
+                        }
+                        else{
+                            System.out.println("You can´t get over the max weight.");
+                        }
                     }
                     else{
                         System.out.println("This item can´t be taken.");
@@ -136,7 +141,6 @@ public class Player
         }
         else{
             if(!inventory.isEmpty()){
-                Item itemDroped = null;
                 boolean found = false;
                 for(int i = 0; i < inventory.size() && !found; i++){
                     Item itemToDrop = inventory.get(i);
@@ -144,11 +148,8 @@ public class Player
                         currentRoom.addItem(itemToDrop);
                         inventoryWeight -= itemToDrop.getItemWeight();
                         inventory.remove(itemToDrop);
-                        found = true; 
+                        found = true;
                         System.out.println("You have droped the item: " + itemToDrop.getId() + ".");
-                    }
-                    else{
-                        System.out.println("The item don´t exist in your inventory.");
                     }
                 }
             }
