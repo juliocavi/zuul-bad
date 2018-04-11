@@ -169,6 +169,9 @@ public class Game
         else if (commandWord.equals("items")) {
             player.showItems();
         }
+        else if (commandWord.equals("drop")) {
+            player.dropItem(command.getSecondWord());
+        }
 
         return wantToQuit;
     }

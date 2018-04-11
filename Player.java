@@ -55,7 +55,7 @@ public class Player
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("There is no door!\n");
         }
         else {
             moveRooms.push(currentRoom);
@@ -100,7 +100,7 @@ public class Player
         if(secondWord == null){
             System.out.println("Take what?");
         }
-        else if(secondWord != null){
+        else{
             //if there are items in the rooms
             if(currentRoom.emptyRoom() == false){
                 Item itemTaken = currentRoom.getItemRoom(secondWord);
@@ -122,6 +122,38 @@ public class Player
             }
             else{
                 System.out.println("There are no items to take in this room.");
+            }
+        }
+    }
+
+    /**
+     * Drop an item in the current room.
+     */
+    public void dropItem(String secondWord)
+    {
+        if(secondWord == null){
+            System.out.println("Drop what?");
+        }
+        else{
+            if(!inventory.isEmpty()){
+                Item itemDroped = null;
+                boolean found = false;
+                for(int i = 0; i < inventory.size() && !found; i++){
+                    Item itemToDrop = inventory.get(i);
+                    if(itemToDrop.getId().equals(secondWord)){
+                        currentRoom.addItem(itemToDrop);
+                        inventoryWeight -= itemToDrop.getItemWeight();
+                        inventory.remove(itemToDrop);
+                        found = true; 
+                        System.out.println("You have droped the item: " + itemToDrop.getId() + ".");
+                    }
+                    else{
+                        System.out.println("The item don´t exist in your inventory.");
+                    }
+                }
+            }
+            else{
+                System.out.println("Your inventory is empty.");
             }
         }
     }

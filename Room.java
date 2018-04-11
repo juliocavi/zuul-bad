@@ -154,7 +154,14 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitsString() + ".\n" + "There is: \n" + getItemsString();
+        String toReturn = "You are " + description + ".\n" + getExitsString() + ".\n" + "There is: \n";
+        if(!itemsRoom.isEmpty()){
+            toReturn += getItemsString();
+        }
+        else{
+            toReturn += "nothing in this room.\n";
+        }
+        return toReturn;
     }
 }
 
