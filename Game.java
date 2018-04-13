@@ -37,7 +37,7 @@ public class Game
     private Room createRooms()
     {
         Room hall, habitaciones, cafeteria, consulta, escaner, preoperatorio, quirofano;
-        Item coat, receptionTable, potty, television, bed, coffee, chair, notebook, safeboard, antibiotic, bandages, scalpel;
+        Item wheelchair, coat, receptionTable, patient, potty, television, bed, coffee, chair, notebook, safeboard, antibiotic, bandages, scalpel;
 
         // create the rooms
         hall = new Room("in the hall");
@@ -49,8 +49,10 @@ public class Game
         quirofano = new Room("in the operating theater");
 
         //create the items of the rooms
+        wheelchair = new Item("wheelchair", "a wheelchair", 3, true);
         coat = new Item("coat", "a coat", 0.5, true);
         receptionTable = new Item("table", "a reception table", 15, false);
+        patient = new Item("patient", "a patient", 80, false);
         potty = new Item("potty", "a potty", 0.3, true);
         television = new Item("television", "a television", 6, false);
         bed = new Item("bed", "a bed", 25, false);
@@ -63,8 +65,10 @@ public class Game
         scalpel = new Item("scalpel", "a scalpel",0.1, true);
 
         //add the item to the rooms
+        hall.addItem(wheelchair);
         hall.addItem(coat);
         hall.addItem(receptionTable);
+        habitaciones.addItem(patient);
         habitaciones.addItem(potty);
         habitaciones.addItem(television);
         habitaciones.addItem(bed);
@@ -171,6 +175,9 @@ public class Game
         }
         else if (commandWord.equals("drop")) {
             player.dropItem(command.getSecondWord());
+        }
+        else if (commandWord.equals("useChair")) {
+            player.useWheelChair(command.getSecondWord());
         }
 
         return wantToQuit;

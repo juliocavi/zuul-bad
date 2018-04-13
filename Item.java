@@ -59,6 +59,14 @@ public class Item
     }
 
     /**
+     * Change the posibility for take or not the item.
+     */
+    public void changePickUpItem(boolean pickUpItem)
+    {
+        canBePickedUp = pickUpItem;
+    }
+    
+    /**
      * Return the description and weight of an Item.
      * 
      * @return a String eith the description of the items
