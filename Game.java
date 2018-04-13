@@ -21,7 +21,8 @@ public class Game
 {
     private Parser parser;
     private Player player;
-
+    private CommandWord commandWord;
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -143,43 +144,43 @@ public class Game
     {
         boolean wantToQuit = false;
 
-        if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
-            return false;
+        switch (commandWord) {
+            case UNKNOWN:
+                System.out.println("I don't know what you mean...");
+                //return false;
+                break;
+            case HELP:
+                printHelp();
+                break;
+            case GO:
+                player.goRoom(command);
+                break;
+            case LOOK:
+                player.look();
+                break;
+            case EAT:
+                player.eat();
+                break;
+            case QUIT:
+                wantToQuit = quit(command);
+                break;
+            case BACK:
+                player.back();
+                break;
+            case TAKE:
+                player.take(command.getSecondWord());
+                break;
+            case ITEMS:
+                player.showItems();
+                break;
+            case DROP:
+                player.dropItem(command.getSecondWord());
+                break;
+            case USECHAIR:
+                player.useWheelChair(command.getSecondWord());
+                break;
         }
-
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
-            printHelp();
-        }
-        else if (commandWord.equals("go")) {
-            player.goRoom(command);
-        }
-        else if(commandWord.equals("look")) {
-            player.look();
-        }
-        else if (commandWord.equals("eat")) {
-            player.eat();
-        }
-        else if (commandWord.equals("quit")) {
-            wantToQuit = quit(command);
-        }
-        else if (commandWord.equals("back")) {
-            player.back();
-        }
-        else if (commandWord.equals("take")) {
-            player.take(command.getSecondWord());
-        }
-        else if (commandWord.equals("items")) {
-            player.showItems();
-        }
-        else if (commandWord.equals("drop")) {
-            player.dropItem(command.getSecondWord());
-        }
-        else if (commandWord.equals("useChair")) {
-            player.useWheelChair(command.getSecondWord());
-        }
-
+                
         return wantToQuit;
     }
 
